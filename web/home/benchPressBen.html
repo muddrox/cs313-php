@@ -79,35 +79,37 @@
               color: white;
             }
 
-            .navBar {
+            #navBar {
               text-align: center;
+            
+              min-width: 1000px;
+              max-width: 100%
             }
-
-            .navBar ul {
-              display: block;
+            
+            #navBar ul {
               margin: auto;
-
+              padding: 0;
+            
+              list-style: none;
+            
               width: 500px;
             }
-
-            .navBar ul li {
-               display: block;
-               float: left;
-
-               padding: 10px 16px;
-               width: 120px;
-
+            
+            #navBar li {
+              display: inline-block;
+              width: 200px;
             }
-
-            .navBar ul li a {
+            
+            #navBar li a {
               display: block;
-
+              margin: auto;
+            
               background-color: #e6b3ff;
-
+            
               border-style: dashed;
               border-radius: 10px;
-
-              padding: 5px 10px;
+            
+              padding: 5px 20px;
               width: 100px;
             }
         </style>
@@ -121,12 +123,11 @@
             </canvas>
         </div>
 
-        <div class="navBar">
-           <ul>
-              <li> <a href="week04.html">Home</a> </li>
-              <li> <a href="secondary.html">Feedback</a> </li>
-              <li> <a href="rationale.html">Rationale</a> </li>
-           </ul>
+        <div id="navBar">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="assignments.html">Assignments</a></li>
+            </ul>
         </div>
 
         <br>
