@@ -34,20 +34,24 @@
 
             <p id="itemReview">
                 <?php
-                    for ( $i = 0; $i < count($cart); $i++ ) {
-                        echo "$" . $cart[$i][1] . " - " . $cart[$i][0];
-                        echo "<input class='add' "
-                            . " type='button' "
-                            . " value='Remove' "
-                            . ' onclick="removeItem('
-                            . $i . ')"><br>';
-                        $total += $cart[$i][1];
+                    if ( count($cart) != 0 ) {
+                        for ( $i = 0; $i < count($cart); $i++ ) {
+                            echo "$" . $cart[$i][1] . " - " . $cart[$i][0];
+                            echo "<input class='add' "
+                                . " type='button' "
+                                . " value='Remove' "
+                                . ' onclick="removeItem('
+                                . $i . ')"><br>';
+                            $total += $cart[$i][1];
+                        }
+
+                        echo "<br>Total Price: $" . $total . "<br><br>";
+
+                        echo "<input type='submit' value='Proceed to Checkout'>";
+                    } else {
+                        echo "Your cart is empty!";
                     }
-
-                    echo "<br>Total Price: $" . $total . "<br><br>";
                 ?>
-
-                <input type="submit" value="Proceed to Checkout">
             </p>
         </form>
     </body>

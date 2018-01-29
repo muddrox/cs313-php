@@ -6,8 +6,12 @@
     if ( !isset($_SESSION['cart']) ) {
         $_SESSION['cart'] = array();
     } else {
-        $cart = $_SESSION['cart'];
-        $load = true;
+        if ( count($_SESSION['cart']) == 0 ){
+            $_SESSION['cart'] = array();
+        } else {
+            $cart = $_SESSION['cart'];
+            $load = true;
+        }
     }
 ?>
 
