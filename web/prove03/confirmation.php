@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Checkout</title>
+        <title>Confirmation</title>
         <script type="text/javascript" src="ajax.js"></script>
         <link rel="stylesheet" href="style.css"/>
     </head>
@@ -26,7 +26,7 @@
             </ul>
         </div>
 
-        <h2 id="shopHeader">Checkout</h2>
+        <h2 id="shopHeader">Confirmation</h2>
 
         <form action="browse.php" class="mainTextBox blueBack">
             <p id="itemReview">
