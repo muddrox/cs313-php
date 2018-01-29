@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Checkout</title>
+        <script type="text/javascript" src="ajax.js"></script>
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    
+    
+    <body>
+        <br>
+            <h1><img id="header" src="bpbHeader.png" alt="Bench Press Ben Header"></h1>
+        <br>
+
+        <div id="navBar">
+            <ul>
+                <li><a href="browse.php">Browse</a></li>
+                <li><a href="review.php">View Cart</a></li>
+            </ul>
+        </div>
+
+        <h2 id="shopHeader">Checkout</h2>
+
+        <form action="Confirmation.php" class="mainTextBox blueBack" method="post">
+            <p id="itemReview">
+                You're almost there!  Please enter your shipping address and
+                then we will take care of the rest. <br><br>
+
+                Shipping Address: <input name="address" size="20" type="text"> <br> <br>
+
+                <input type="submit" value="Confirm Purchase">
+            </p>
+        </form>
+    </body>
+</html>
