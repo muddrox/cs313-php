@@ -39,14 +39,19 @@
 
         <h2 id="shopHeader">Feedback for Ben!</h2>
 
-        <p class="mainTextBox orangeBack">
-            Ben is not impervious to self improvement.  He faces his blemishes head one
-            crushes them with his determination to become his best self.  ben's game, 
+        <form action="insert_feedback.php" class="mainTextBox orangeBack" method='post'> 
+            Ben is not impervious to self improvement.  He faces his blemishes head on
+            and crushes them with his determination to become his best self.  ben's game, 
             Bench Press Ben, is in development which means it has a long ways to go before
             it is published.  As the game's creator, I welcome all feedback aimed toward
-            improving the game.  The currently featured feedback for this game is included
-            below. update...
-        </p>
+            improving the game.  Please add your feedback to the comments below. <br><br>
+
+            Name: <br>
+            <input name="name" size="20" type="text"><br><br>
+            Feedback: <br>
+            <textarea name="content"></textarea><br><br>
+            <input type="submit" value="Submit Feedback">
+        </form>
 
         <?php
             foreach ( $users as $user ) {
