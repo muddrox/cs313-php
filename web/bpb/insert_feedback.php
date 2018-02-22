@@ -1,29 +1,27 @@
 <?php
-	try {
-		$servername = 'localhost';
-		$username = 'bpb_user';
-		$password = 'benchit';
+    session_start();
 
-		$db = new PDO("pgsql:host=$servername;dbname=bpb_db", $username, $password);
-	} catch ( PDOException $ex ) {
-		echo "Failed to establish connection: ". $ex . "<br>";
-		die();
+    if ( !isset($_SESSION['username']) ) {
+        $message = "Failed to post feedback: you must be logged in!";
+        header("Location: signIn.php?message=$message&msgColor=red");
+        die();
 	}
+	
+    require 'dbconnect.php';
+    $db = get_db();
 
-	$name = htmlspecialchars($_POST['name']);
-	$password = 'pass';
-
+	$name = $_SESSION['username'];
 	$content = htmlspecialchars($_POST['content']);
 
 	//insert name into usernames
-    $stmt = $db->prepare('INSERT INTO usernames (id, name, password) VALUES (DEFAULT, :name, :password)');
+    $stmt = $db->prepare('SELECT id FROM usernames WHERE name=:name');
 
     $stmt->bindValue(":name", $name, PDO::PARAM_STR);
-	$stmt->bindValue(":password", $password, PDO::PARAM_STR);
 
 	$stmt->execute();
 
-	$userId = $db->lastInsertId(); //get last id inserted to store in feedback table.
+	$row = $stmt->fetch();
+	$userId = $row['id'];
 
 	//store into feedback table
     $stmt = $db->prepare('INSERT INTO feedback (userId, content) VALUES (:userId, :content)');

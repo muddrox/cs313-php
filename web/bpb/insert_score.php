@@ -1,14 +1,6 @@
 <?php
-	try {
-		$servername = 'localhost';
-		$username = 'bpb_user';
-		$password = 'benchit';
-
-		$db = new PDO("pgsql:host=$servername;dbname=bpb_db", $username, $password);
-	} catch ( PDOException $ex ) {
-		echo "Failed to establish connection: ". $ex . "<br>";
-		die();
-	}
+    require 'dbconnect.php';
+    $db = get_db();
 
     $name = htmlspecialchars($_POST['name']);
 	$score = htmlspecialchars($_POST['score']);

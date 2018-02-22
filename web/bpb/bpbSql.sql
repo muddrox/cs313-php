@@ -6,7 +6,7 @@ CREATE TABLE highscores (
 
 CREATE TABLE usernames (
   id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(256) NOT NULL,
+  name VARCHAR(256) UNIQUE NOT NULL,
   password VARCHAR(256) NOT NULL
 );
 

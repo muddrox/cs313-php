@@ -1,14 +1,9 @@
 <?php
-    try {
-        $servername = 'localhost';
-        $username = 'bpb_user';
-        $password = 'benchit';
-
-        $db = new PDO("pgsql:host=$servername;dbname=bpb_db", $username, $password);
-    } catch ( PDOException $ex ) {
-        echo "Failed to establish connection: ". $ex . "<br>";
-        die();
-    }
+    session_start();
+    $currentUser = $_SESSION['username'];
+    
+    require 'dbconnect.php';
+    $db = get_db();
 
     $stmt = $db->prepare('SELECT name, content FROM usernames u JOIN feedback f ON f.userid = u.id');
     $stmt->execute();
@@ -25,17 +20,7 @@
     </head>
     
     <body>
-        <br>
-            <h1><img id="header" src="bpbHeader.png" alt="Bench Press Ben Header"></h1>
-        <br>
-
-        <div id="navBar">
-            <ul>
-                <li><a href="highscores.php">Highscores</a></li>
-                <li><a href="achievements.php">Achievements</a></li>
-                <li><a href="feedback.php">Feedback</a></li>
-            </ul>
-        </div>
+        <?php require 'navBar.php';?>
 
         <h2 id="shopHeader">Feedback for Ben!</h2>
 
@@ -46,8 +31,6 @@
             it is published.  As the game's creator, I welcome all feedback aimed toward
             improving the game.  Please add your feedback to the comments below. <br><br>
 
-            Name: <br>
-            <input name="name" size="20" type="text"><br><br>
             Feedback: <br>
             <textarea name="content"></textarea><br><br>
             <input type="submit" value="Submit Feedback">

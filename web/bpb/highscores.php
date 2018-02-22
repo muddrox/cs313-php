@@ -1,14 +1,9 @@
 <?php
-    try {
-        $servername = 'localhost';
-        $username = 'bpb_user';
-        $password = 'benchit';
+    session_start();
+    $currentUser = $_SESSION['username'];
 
-        $db = new PDO("pgsql:host=$servername;dbname=bpb_db", $username, $password);
-    } catch ( PDOException $ex ) {
-        echo "Failed to establish connection: ". $ex . "<br>";
-        die();
-    }
+    require 'dbconnect.php';
+    $db = get_db();
 
     $stmt = $db->prepare('SELECT player, score FROM highscores ORDER BY score DESC');
     $stmt->execute();
@@ -25,17 +20,7 @@
     </head>
     
     <body>
-        <br>
-            <h1><img id="header" src="bpbHeader.png" alt="Bench Press Ben Header"></h1>
-        <br>
-
-        <div id="navBar">
-            <ul>
-                <li><a href="highscores.php">Highscores</a></li>
-                <li><a href="achievements.php">Achievements</a></li>
-                <li><a href="feedback.php">Feedback</a></li>
-            </ul>
-        </div>
+        <?php require 'navBar.php';?>
 
         <h2 id="shopHeader">Top 10 Scores!</h2>
 
