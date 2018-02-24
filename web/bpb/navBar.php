@@ -25,6 +25,7 @@
                 <li><a href='highscores.php'>Highscores</a></li>
                 <li><a href='achievements.php'>Achievements</a></li>
                 <li><a href='feedback.php'>Feedback</a></li>
+                <li><a href='benchPressBen.html'>Play Game!</a></li>
             </ul>
         </div>";
 ?>

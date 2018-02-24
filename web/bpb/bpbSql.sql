@@ -1,13 +1,13 @@
-CREATE TABLE highscores (
-  id SERIAL PRIMARY KEY NOT NULL,
-  player varchar(256) NOT NULL,
-  score INT NOT NULL
-);
-
 CREATE TABLE usernames (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(256) UNIQUE NOT NULL,
   password VARCHAR(256) NOT NULL
+);
+
+CREATE TABLE highscores (
+  id SERIAL PRIMARY KEY NOT NULL,
+  userId int NOT NULL REFERENCES usernames(id),
+  score INT NOT NULL
 );
 
 CREATE TABLE achievements (
@@ -16,9 +16,9 @@ CREATE TABLE achievements (
   info VARCHAR(256) NOT NULL
 );
 
-CREATE TABLE playerAchievements (
+CREATE TABLE userAchievements (
   id SERIAL PRIMARY KEY NOT NULL,
-  nameId int NOT NULL REFERENCES highscores(id),
+  userId int NOT NULL REFERENCES usernames(id),
   achievementId int NOT NULL REFERENCES achievements(id)
 );
 
@@ -28,37 +28,28 @@ CREATE TABLE feedback (
   content varchar(512) NOT NULL
 );
 
-INSERT INTO highscores (player, score) VALUES
-	('Brock', 500),
-	('Kasidy', 300),
-	('Jake', 400),
-	('Colton', 650),
-	('Alex', 200),
-	('Braidon', 600),
-	('Shaun', 20),
-	('Kylie', 470),
-  ('Topher', 900),
-  ('Riley', 5);
-
 INSERT INTO usernames (name, password) VALUES 
-  ('Brock', 'pass'),
-	('Kasidy', 'pass'),
-	('Jake', 'pass'),
-	('Colton', 'pass');
+  ('Ted', 'pass'),
+	('Felisha', 'pass'),
+	('Kip', 'pass'),
+	('Betsy', 'pass');
+
+INSERT INTO highscores (userId, score) VALUES
+	(1, 50),
+	(2, 30),
+	(3, 40),
+	(4, 65);
 
 INSERT INTO achievements (title, info) VALUES 
-  ('Over Achiever', 'Got over 500 points!'),
+  ('Over Achiever', 'Got over 400 points!'),
 	('Epic Failure', 'You got 0 points!  Good job?'),
-	('Why did the chicken cross the road?', 'To get away from you!  Over 100 nuclear chickens detonated.'),
-	('Hey Batta Batta, swing!', 'Struck out 25 bats');
+	('Why did the chicken cross the road?', 'To get away from you!  Over 15 nuclear chickens detonated.'),
+	('Hey Batta Batta, swing!', 'Struck out 10 bats');
 
-INSERT INTO playerAchievements (nameId, achievementId) VALUES 
-  (1, 4),
-  (4, 1),
-  (1, 3),
-  (2, 4),
-  (3, 2),
-  (3, 3);
+INSERT INTO userAchievements (userId, achievementId) VALUES 
+  (1, 2),
+  (4, 3),
+  (1, 4);
 
 INSERT INTO feedback (userId, content) VALUES 
   (1, 'I like Bench Press Ben.'),
@@ -69,6 +60,6 @@ INSERT INTO feedback (userId, content) VALUES
 GRANT ALL ON highscores TO bpb_user;
 GRANT ALL ON usernames TO bpb_user;
 GRANT ALL ON achievements TO bpb_user;
-GRANT ALL ON playerAchievements TO bpb_user;
+GRANT ALL ON userAchievements TO bpb_user;
 GRANT ALL ON feedback TO bpb_user;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO bpb_user;

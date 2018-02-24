@@ -13,7 +13,7 @@
 	$name = $_SESSION['username'];
 	$content = htmlspecialchars($_POST['content']);
 
-	//insert name into usernames
+	//get username id from the usernames table
     $stmt = $db->prepare('SELECT id FROM usernames WHERE name=:name');
 
     $stmt->bindValue(":name", $name, PDO::PARAM_STR);

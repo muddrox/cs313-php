@@ -5,26 +5,21 @@
     $name = htmlspecialchars($_POST['name']);
 	$score = htmlspecialchars($_POST['score']);
 
-    $stmt = $db->prepare('INSERT INTO highscores (id, player, score) VALUES (DEFAULT, :player, :score)');
+	//get username id from the usernames table
+	$stmt = $db->prepare('SELECT id FROM usernames WHERE name=:name');
 
-    $stmt->bindValue(":player", $name, PDO::PARAM_STR);
-	$stmt->bindValue(":score", $score, PDO::PARAM_INT);
+	$stmt->bindValue(":name", $name, PDO::PARAM_STR);
 
 	$stmt->execute();
 
-	echo "connected!! <br>";
+	$row = $stmt->fetch();
+	$userId = $row['id'];
 
-	$stmt = $db->prepare('SELECT player, score FROM highscores ORDER BY score DESC');
-    $stmt->execute();
+	//store into highscores table
+	$stmt = $db->prepare('INSERT INTO highscores (id, userId, score) VALUES (DEFAULT, :userId, :score)');
 
-	$players = $stmt->fetchall(PDO::FETCH_ASSOC);
-	$rank = 1;
+	$stmt->bindValue(":userId", $userId, PDO::PARAM_INT);
+	$stmt->bindValue(":score", $score, PDO::PARAM_INT);
 
-	foreach ( $players as $player ) {
-		$name = $player['player'];
-		$score = $player['score'];
-
-		echo $rank . " - " . $name . " - " . $score . "<br>";
-		$rank++;
-	}
+	$stmt->execute();
 ?>

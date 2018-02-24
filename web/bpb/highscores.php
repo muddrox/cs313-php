@@ -5,7 +5,7 @@
     require 'dbconnect.php';
     $db = get_db();
 
-    $stmt = $db->prepare('SELECT player, score FROM highscores ORDER BY score DESC');
+    $stmt = $db->prepare('SELECT name, score FROM usernames u JOIN highscores h ON h.userid = u.id ORDER BY score DESC');
     $stmt->execute();
 
     $players = $stmt->fetchall(PDO::FETCH_ASSOC);
@@ -32,7 +32,7 @@
         <p class="mainTextBox purpBack">
             <?php
                 foreach ( $players as $player ) {
-                    $name = $player['player'];
+                    $name = $player['name'];
                     $score = $player['score'];
 
                     echo $rank . " - " . $name . " - " . $score . "<br>";

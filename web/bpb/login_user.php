@@ -1,10 +1,18 @@
 <?php
     session_start();
 
-    if ( isset($_SESSION['username']) ) {
-        $message = "Login Failed: you are already logged in to an account";
-        header("Location: signUp.php?message=$message&msgColor=red");
-        die();
+    $inGame = false;
+
+    if ( isset($_POST['inGame']) ) {
+        $inGame = true;
+    }
+
+    if ( !$inGame ) {
+        if ( isset($_SESSION['username']) ) {
+            $message = "Login Failed: you are already logged in to an account";
+            header("Location: signUp.php?message=$message&msgColor=red");
+            die();
+        }
     }
 
     require 'dbconnect.php';
@@ -17,7 +25,13 @@
         || !isset($pass) || $pass == "" ) 
     {
         $message = "Login failed";
-        header("Location: signIn.php?message=$message&msgColor=red");
+        
+        if ( !$inGame ) {
+            header("Location: signIn.php?message=$message&msgColor=red");
+        } else {
+            echo $message;
+        }
+
         die();
     }
 
@@ -33,19 +47,34 @@
 
         if ( password_verify($pass, $hashedPass) ) {
             $message = "You are now logged in as $name";
+            
+            if ( !$inGame ) {
+                $_SESSION['username'] = $name;
+                header("Location: signIn.php?message=$message&msgColor=purple");
+            } else {
+                echo "LOGIN_SUCCESSFUL|$name";
+            }
 
-            $_SESSION['username'] = $name;
-
-            header("Location: signIn.php?message=$message&msgColor=purple");
             die();
         } else {
             $message = "Login failed: Check your password or username.";
-            header("Location: signIn.php?message=$message&msgColor=red");
+            if ( !$inGame ) {
+                header("Location: signIn.php?message=$message&msgColor=red");
+            } else {
+                echo $message;
+            }
+
             die();  
         }
     } else {
         $message = "Login failed";
-        header("Location: signIn.php?message=$message&msgColor=red");
+        
+        if ( !$inGame ) {
+            header("Location: signIn.php?message=$message&msgColor=red");
+        } else {
+            echo $message;
+        }
+
         die();  
     }
 ?>

@@ -32,7 +32,7 @@
             improving the game.  Please add your feedback to the comments below. <br><br>
 
             Feedback: <br>
-            <textarea name="content"></textarea><br><br>
+            <textarea name="content" rows='10' cols='148'></textarea><br><br>
             <input type="submit" value="Submit Feedback">
         </form>
 

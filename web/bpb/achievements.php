@@ -5,9 +5,9 @@
     require 'dbconnect.php';
     $db = get_db();
 
-    $stmt = $db->prepare('SELECT player, title, info FROM highscores h 
-            JOIN playerAchievements pa ON h.id = pa.nameId
-            JOIN achievements a ON a.id = pa.achievementId');
+    $stmt = $db->prepare('SELECT name, title, info FROM usernames u 
+            JOIN userAchievements ua ON u.id = ua.userId
+            JOIN achievements a ON a.id = ua.achievementId');
 
     $stmt->execute();
 
@@ -39,7 +39,7 @@
                 else
                     echo "<p class='mainTextBox blueBack'>";
 
-                $name = $achievement['player'];
+                $name = $achievement['name'];
                 $title = $achievement['title'];
                 $info = $achievement['info'];
                 
